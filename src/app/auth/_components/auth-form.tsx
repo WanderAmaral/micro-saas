@@ -4,11 +4,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { toast } from "@/components/ui/use-toast";
+import { useEffect } from "react";
+import { auth } from "@/services/auth";
+import { redirect } from "next/navigation";
 
-export function AuthForm() {
+export  function AuthForm() {
   const { register, handleSubmit } = useForm();
+  
+
   const handleClickSubmit = async (data: any) => {
     try {
       await signIn("email", { email: data.email, redirect: false });
@@ -24,6 +29,10 @@ export function AuthForm() {
       });
     }
   };
+
+  // useEffect(() => {
+  //   if (session?.user) return redirect("/");
+  // });
 
   return (
     <div className="grid md:grid-cols-2 items-center gap-6 max-w-3xl mx-auto px-4 py-6">

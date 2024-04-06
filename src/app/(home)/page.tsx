@@ -1,5 +1,7 @@
+import { auth } from "@/services/auth";
 
+export default async function Home() {
+  const session = await auth();
 
-export default function Home() {
-  return <>Hello world</>;
+  return <pre>{JSON.stringify(session?.user, null, 1)}</pre>;
 }
