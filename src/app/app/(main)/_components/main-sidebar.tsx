@@ -30,7 +30,7 @@ const MainSidebar = () => {
           <DashboardSidebarMain className="flex flex-col flex-grow">
             <DashboardSidebarNav>
               <DashboardSidebarNavMain>
-                <DashboardSidebarNavLink href="/app" active={isActive("/app")}>
+                <DashboardSidebarNavLink href="/app" active={isActive("/app")} className="">
                   <CalendarCheck2 size={20} />
                   Tarefas
                 </DashboardSidebarNavLink>

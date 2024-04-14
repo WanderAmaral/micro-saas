@@ -50,7 +50,7 @@ export function DashboardSidebarMain({
   className,
   children,
 }: DashboardSidebarGenericProps) {
-  return <main className={cn(["pt-4 px-3", className])}>{children}</main>;
+  return <main className={cn(["pt-4 px-3 ", className])}>{children}</main>;
 }
 
 export function DashboardSidebarNav({
@@ -87,7 +87,7 @@ export function DashboardSidebarNavMain({
   className,
   children,
 }: DashboardSidebarGenericProps) {
-  return <main className={cn(["flex flex-col", className])}>{children}</main>;
+  return <main className={cn(["flex flex-col gap-1", className])}>{children}</main>;
 }
 
 type DashboardSidebarNavLinkProps = {
@@ -105,7 +105,7 @@ export function DashboardSidebarNavLink({
     <Link
       href={href}
       className={cn([
-        "flex items-center text-xs px-3 py-2 rounded-md gap-2",
+        "flex items-center text-xs px-3 py-2 rounded-md gap-2 hover:text-black hover:bg-zinc-200 ",
         active && "bg-zinc-200",
         className,
       ])}

@@ -5,15 +5,15 @@ import {
   DashboardPageMain,
 } from "@/components/dashboard/page";
 
-export default function Home() {
+const SettingsPage = () => {
   return (
     <DashboardPage>
       <DashboardPageHeader>
-        <DashboardPageHeaderTitle>Tarefas</DashboardPageHeaderTitle>
+        <DashboardPageHeaderTitle>configurações</DashboardPageHeaderTitle>
       </DashboardPageHeader>
-      <DashboardPageMain>
-        Tarefas
-      </DashboardPageMain>
+      <DashboardPageMain>Configurações</DashboardPageMain>
     </DashboardPage>
   );
-}
+};
+
+export default SettingsPage;
