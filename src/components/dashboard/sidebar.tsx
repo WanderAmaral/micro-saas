@@ -43,7 +43,7 @@ export function DashboardSidebarHeaderTitle({
   className,
   children,
 }: DashboardSidebarGenericProps) {
-  return <h2 className={cn(["", className])}>{children}</h2>;
+  return <h2 className={cn(["py-3", className])}>{children}</h2>;
 }
 
 export function DashboardSidebarMain({

@@ -11,9 +11,15 @@ import {
 } from "@/components/dashboard/sidebar";
 import Logo from "@/components/logo";
 import { CalendarCheck2, Settings } from "lucide-react";
+import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
+import UserDropDown from "./user-dropdown";
 
-const MainSidebar = () => {
+type UserProps = {
+  user: Session["user"];
+};
+
+const MainSidebar = ({ user }: UserProps) => {
   const pathname = usePathname();
 
   const isActive = (path: string) => {
@@ -30,7 +36,7 @@ const MainSidebar = () => {
           <DashboardSidebarMain className="flex flex-col flex-grow">
             <DashboardSidebarNav>
               <DashboardSidebarNavMain>
-                <DashboardSidebarNavLink href="/app" active={isActive("/app")} className="">
+                <DashboardSidebarNavLink href="/app" active={isActive("/app")}>
                   <CalendarCheck2 size={20} />
                   Tarefas
                 </DashboardSidebarNavLink>
@@ -56,7 +62,7 @@ const MainSidebar = () => {
             </DashboardSidebarNav>
           </DashboardSidebarMain>
           <DashboardSidebarFooter>
-            <p>User</p>
+            <UserDropDown user={user} />
           </DashboardSidebarFooter>
         </DashboardSidebar>
       </div>

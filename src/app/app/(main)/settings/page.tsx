@@ -9,7 +9,7 @@ const SettingsPage = () => {
   return (
     <DashboardPage>
       <DashboardPageHeader>
-        <DashboardPageHeaderTitle>configurações</DashboardPageHeaderTitle>
+        <DashboardPageHeaderTitle>Configurações</DashboardPageHeaderTitle>
       </DashboardPageHeader>
       <DashboardPageMain>Configurações</DashboardPageMain>
     </DashboardPage>
