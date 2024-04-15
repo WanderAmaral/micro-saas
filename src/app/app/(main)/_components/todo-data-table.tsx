@@ -39,6 +39,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Search } from "lucide-react";
+import DialogAddTask from "./dialog-add-task";
 
 export type Todo = {
   id: string;
@@ -53,7 +56,8 @@ const data: Todo[] = [
     id: "1",
     title: "Ler Um livro",
     createdAt: new Date("2023-04-04"),
-    updatedAt: new Date(""),
+    updatedAt: new Date("2023-05-10"),
+    finishedAt: new Date("2024-04-25"),
   },
   {
     id: "2",
@@ -80,7 +84,16 @@ export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => <div className="capitalize"></div>,
+    cell: ({ row }) => {
+      const { finishedAt } = row.original;
+
+      const status: "done" | "waiting" = finishedAt ? "done" : "waiting";
+      const statusVariant: "outline" | "default" = finishedAt
+        ? "outline"
+        : "default";
+
+      return <Badge variant={statusVariant}>{status}</Badge>;
+    },
   },
   {
     accessorKey: "title",
@@ -90,7 +103,7 @@ export const columns: ColumnDef<Todo>[] = [
           variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Title
           <CaretSortIcon className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -116,7 +129,10 @@ export const columns: ColumnDef<Todo>[] = [
 
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger
+            asChild
+            className="flex items-center justify-center"
+          >
             <Button variant="link" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
               <DotsHorizontalIcon className="h-4 w-4" />
@@ -169,41 +185,50 @@ export function TodoDataTable() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="flex items-center justify-between py-4">
+        <div className=" flex w-full gap-2">
+          <Input
+            placeholder="Filter task..."
+            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("title")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <Button variant={"outline"}>
+            <Search />
+          </Button>
+        </div>
+
+        <div className="flex  gap-3">
+          <DialogAddTask />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
