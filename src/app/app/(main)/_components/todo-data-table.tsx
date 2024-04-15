@@ -201,7 +201,7 @@ export function TodoDataTable() {
         </div>
 
         <div className="flex  gap-3">
-          <DialogAddTask />
+          <DialogAddTask>Add Task</DialogAddTask>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">

@@ -6,7 +6,7 @@ import {
 } from "@/components/dashboard/page";
 import { TodoDataTable } from "./_components/todo-data-table";
 
-export default function Home() {
+export default async function Home() {
   return (
     <DashboardPage>
       <DashboardPageHeader>

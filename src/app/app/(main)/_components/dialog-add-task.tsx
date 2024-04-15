@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,37 +9,60 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Todo } from "@prisma/client";
 import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
-const DialogAddTask = () => {
+interface DialogAddTaskProps {
+  children?: React.ReactNode;
+  defaultValue?: Todo;
+}
+
+const DialogAddTask = ({ children }: DialogAddTaskProps) => {
   const form = useForm();
 
-  const submitFormAddTask = (data: any) => {
+  const handleOnSubmit = form.handleSubmit((data) => {
     console.log({ data });
-  };
+  });
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" className="ml-auto">
-          Add Task
+          {children}
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>Add Task</DialogHeader>
-        <form onSubmit={form.handleSubmit(submitFormAddTask)}>
-          <div className="flex flex-col gap-3">
-            <Label>Name</Label>
-            <Input placeholder="Name task" {...form.register("name")} />
-            <div className="mt-5 flex justify-end">
-              <DialogClose asChild>
-                <Button type="submit" variant={"outline"} className="w-[40%]">
-                  Add
-                </Button>
-              </DialogClose>
-            </div>
-          </div>
-        </form>
+        <Form {...form}>
+          <form className="space-y-8" onSubmit={handleOnSubmit}>
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name task</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Task" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" variant={'outline'}>Submit</Button>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
