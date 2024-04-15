@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Todo } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -20,6 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Todo } from "../types";
 
 interface DialogAddTaskProps {
   children?: React.ReactNode;

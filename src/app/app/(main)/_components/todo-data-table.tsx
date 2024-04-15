@@ -42,53 +42,18 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Search } from "lucide-react";
 import DialogAddTask from "./dialog-add-task";
+import { Todo } from "../types";
 
-export type Todo = {
-  id: string;
-  title: string;
-  createdAt: Date;
-  updatedAt: Date;
-  finishedAt?: Date;
-};
-
-const data: Todo[] = [
-  {
-    id: "1",
-    title: "Ler Um livro",
-    createdAt: new Date("2023-04-04"),
-    updatedAt: new Date("2023-05-10"),
-    finishedAt: new Date("2024-04-25"),
-  },
-  {
-    id: "2",
-    title: "Atividades Faculdade",
-    createdAt: new Date("2023-04-04"),
-    updatedAt: new Date("2023-04-05"),
-  },
-  {
-    id: "3",
-    title: "Resolver problemas",
-    createdAt: new Date("2023-04-04"),
-    updatedAt: new Date("2023-04-06"),
-    finishedAt: new Date("2024-04-25"),
-  },
-  {
-    id: "4",
-    title: "Jogar futebol",
-    createdAt: new Date("2023-04-04"),
-    updatedAt: new Date("2023-04-07"),
-  },
-];
 
 export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const { finishedAt } = row.original;
+      const { doneAt } = row.original;
 
-      const status: "done" | "waiting" = finishedAt ? "done" : "waiting";
-      const statusVariant: "outline" | "default" = finishedAt
+      const status: "done" | "waiting" = doneAt ? "done" : "waiting";
+      const statusVariant: "outline" | "default" = doneAt
         ? "outline"
         : "default";
 
@@ -155,7 +120,11 @@ export const columns: ColumnDef<Todo>[] = [
   },
 ];
 
-export function TodoDataTable() {
+type TodoDataTabble = {
+  data: Todo[]
+}
+
+export function TodoDataTable({data}: TodoDataTabble) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
