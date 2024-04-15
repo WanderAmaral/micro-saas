@@ -4,6 +4,7 @@ import {
   DashboardPageHeaderTitle,
   DashboardPageMain,
 } from "@/components/dashboard/page";
+import { TodoDataTable } from "./_components/todo-data-table";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
         <DashboardPageHeaderTitle>Tarefas</DashboardPageHeaderTitle>
       </DashboardPageHeader>
       <DashboardPageMain>
-        Tarefas
+        <TodoDataTable />
       </DashboardPageMain>
     </DashboardPage>
   );

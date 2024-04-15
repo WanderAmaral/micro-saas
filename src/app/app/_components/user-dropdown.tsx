@@ -67,7 +67,7 @@ const UserDropDown = ({ user }: UserDropdownProps) => {
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => signOut()} className="gap-2">
+          <DropdownMenuItem onClick={() => signOut()} className="gap-2 cursor-pointer">
             <LogOut size={16} />
             Log out
           </DropdownMenuItem>

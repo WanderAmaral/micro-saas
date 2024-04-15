@@ -8,7 +8,7 @@ const Layout = async ({ children }: PropsWithChildren) => {
   const session = await auth();
 
   if (!session) {
-    return redirect('/auth')
+    return redirect("/auth");
   }
 
   return (
