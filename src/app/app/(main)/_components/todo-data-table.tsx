@@ -42,88 +42,114 @@ import { Badge } from "@/components/ui/badge";
 import { Search } from "lucide-react";
 import DialogAddTask from "./dialog-add-task";
 import { Todo } from "../types";
-
-
-export const columns: ColumnDef<Todo>[] = [
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const { doneAt } = row.original;
-
-      const status: "done" | "waiting" = doneAt ? "done" : "waiting";
-      const statusVariant: "outline" | "default" = doneAt
-        ? "outline"
-        : "default";
-
-      return <Badge variant={statusVariant}>{status}</Badge>;
-    },
-  },
-  {
-    accessorKey: "title",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="link"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Title
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div>{row.getValue("title")}</div>,
-  },
-  {
-    accessorKey: "createdAt",
-    header: () => <div className="text-right">createdAt</div>,
-    cell: ({ row }) => {
-      return (
-        <div className="text-right font-medium">
-          {row.original.createdAt.toLocaleString()}
-        </div>
-      );
-    },
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const todo = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            asChild
-            className="flex items-center justify-center"
-          >
-            <Button variant="link" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <DotsHorizontalIcon className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(todo.id)}
-            >
-              Copy todo ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Mark as done</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
+import { deleteTodo, upsertTodo } from "../actions";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 type TodoDataTabble = {
-  data: Todo[]
-}
+  data: Todo[];
+};
 
-export function TodoDataTable({data}: TodoDataTabble) {
+export function TodoDataTable({ data }: TodoDataTabble) {
+  const router = useRouter();
+
+  const handleDeleteTodo = async (todo: string) => {
+    await deleteTodo({ id: todo });
+    router.refresh();
+
+    toast({
+      title: "Delete Seccessful",
+      description: "The todo item has been successfully deleted",
+    });
+  };
+  const handleToggleDoneTodo = async (todo: Todo) => {
+    const doneAt = todo.doneAt ? null : new Date();
+    await upsertTodo({ id: todo.id, doneAt });
+    router.refresh();
+
+    toast({
+      title: "Updated Seccessful",
+      description: "The todo item has been successfully updated",
+    });
+  };
+
+  const columns: ColumnDef<Todo>[] = [
+    {
+      accessorKey: "status",
+      header: "Status",
+      cell: ({ row }) => {
+        const { doneAt } = row.original;
+
+        const status: "done" | "waiting" = doneAt ? "done" : "waiting";
+        const statusVariant: "outline" | "default" = doneAt
+          ? "outline"
+          : "default";
+
+        return <Badge variant={statusVariant}>{status}</Badge>;
+      },
+    },
+    {
+      accessorKey: "title",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="link"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Title
+            <CaretSortIcon className="ml-2 h-4 w-4" />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <div>{row.getValue("title")}</div>,
+    },
+    {
+      accessorKey: "createdAt",
+      header: () => <div className="text-right">createdAt</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-right font-medium">
+            {row.original.createdAt.toLocaleString()}
+          </div>
+        );
+      },
+    },
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const todo = row.original;
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              asChild
+              className="flex items-center justify-center"
+            >
+              <Button variant="link" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <DotsHorizontalIcon className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => navigator.clipboard.writeText(todo.id)}
+              >
+                Copy todo ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => handleToggleDoneTodo(todo)}>Mark as done</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleDeleteTodo(todo.id)}>
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
+  ];
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
