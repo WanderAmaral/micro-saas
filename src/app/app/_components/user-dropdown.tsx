@@ -46,7 +46,7 @@ const UserDropDown = ({ user }: UserDropdownProps) => {
             </div>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className=" w-56 " >
+        <DropdownMenuContent className=" w-56 ">
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">{user.name}</p>
@@ -57,17 +57,20 @@ const UserDropDown = ({ user }: UserDropdownProps) => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem className="gap-2">
+            <DropdownMenuItem className="gap-2  hover:border hover:border-zinc-200">
               <Settings size={16} />
               Configuraçoes
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <RocketIcon className="w-3 h-3 mr-3" />
+            <DropdownMenuItem className="gap-2 hover:border hover:border-zinc-200">
+              <RocketIcon size={16} />
               Upgrade
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => signOut()} className="gap-2 cursor-pointer">
+          
+          <DropdownMenuItem
+            onClick={() => signOut()}
+            className="gap-2 cursor-pointer hover:border hover:border-zinc-200 "
+          >
             <LogOut size={16} />
             Log out
           </DropdownMenuItem>

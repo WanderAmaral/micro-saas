@@ -55,7 +55,7 @@ const DialogAddTask = ({ children }: DialogAddTaskProps) => {
     <Dialog>
       <DialogTrigger asChild>
         <div
-          className="font-medium border rounded-md w-[130px] flex items-center justify-center hover:bg-black hover:text-white cursor-pointer"
+          className="font-medium border rounded-[6px] w-[130px] flex items-center justify-center hover:bg-black hover:text-white cursor-pointer"
           ref={ref}
         >
           {children}

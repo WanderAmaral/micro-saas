@@ -85,7 +85,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           ? "outline"
           : "default";
 
-        return <Badge variant={statusVariant}>{status}</Badge>;
+        return <Badge variant={statusVariant} className="rounded-full">{status}</Badge>;
       },
     },
     {
@@ -189,7 +189,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
             }
             className="max-w-sm"
           />
-          <Button variant={"outline"}>
+          <Button variant={"outline"} className="border border-zinc-200 hover:bg-black hover:text-white">
             <Search />
           </Button>
         </div>
@@ -198,7 +198,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           <DialogAddTask>Add Task</DialogAddTask>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
+              <Button variant="outline" className="ml-auto rounded-[6px] border border-zinc-200 hover:bg-black hover:text-white">
                 Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -224,7 +224,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           </DropdownMenu>
         </div>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-[6px] border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -274,30 +274,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-      </div>
+      
     </div>
   );
 }

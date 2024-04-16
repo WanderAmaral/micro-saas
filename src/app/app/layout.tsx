@@ -1,7 +1,6 @@
 import { PropsWithChildren } from "react";
 import MainSidebar from "./_components/main-sidebar";
 import { auth } from "@/services/auth";
-import { Session } from "next-auth";
 import { redirect } from "next/navigation";
 
 const Layout = async ({ children }: PropsWithChildren) => {
