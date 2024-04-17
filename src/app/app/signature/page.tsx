@@ -11,7 +11,7 @@ import {
         <DashboardPageHeader>
           <DashboardPageHeaderTitle>Assinatura</DashboardPageHeaderTitle>
         </DashboardPageHeader>
-        <DashboardPageMain>Assinatura</DashboardPageMain>
+        <DashboardPageMain>Você ainda não é assinante</DashboardPageMain>
       </DashboardPage>
     );
   };

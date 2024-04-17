@@ -12,6 +12,7 @@ import {
 import { RocketIcon, LogOut, Settings } from "lucide-react";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
 
 type UserDropdownProps = {
   user: Session["user"];
@@ -57,16 +58,18 @@ const UserDropDown = ({ user }: UserDropdownProps) => {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem className="gap-2  hover:border hover:border-zinc-200">
-              <Settings size={16} />
-              Configuraçoes
-            </DropdownMenuItem>
+            <Link href={"/app/settings"}>
+              <DropdownMenuItem className="gap-2  hover:border hover:border-zinc-200">
+                <Settings size={16} />
+                Configurações
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem className="gap-2 hover:border hover:border-zinc-200">
               <RocketIcon size={16} />
               Upgrade
             </DropdownMenuItem>
           </DropdownMenuGroup>
-          
+
           <DropdownMenuItem
             onClick={() => signOut()}
             className="gap-2 cursor-pointer hover:border hover:border-zinc-200 "

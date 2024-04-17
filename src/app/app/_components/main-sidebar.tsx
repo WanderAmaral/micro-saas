@@ -43,7 +43,7 @@ const MainSidebar = ({ user }: UserProps) => {
                 </DashboardSidebarNavLink>
                 <DashboardSidebarNavLink
                   href="/app/signature"
-                  active={isActive("/app/settings")}
+                  active={isActive("/app/signature")}
                 >
                   <ClipboardCheck size={20}/>
                   Assinatura

@@ -39,12 +39,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
+import { Clock, Search, SquarePen } from "lucide-react";
 import DialogAddTask from "./dialog-add-task";
 import { Todo } from "../types";
 import { deleteTodo, upsertTodo } from "../actions";
 import { useRouter } from "next/navigation";
 import { toast } from "@/components/ui/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import DialogUpdated from "./dialog-update";
 
 type TodoDataTabble = {
   data: Todo[];
@@ -85,7 +92,11 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           ? "outline"
           : "default";
 
-        return <Badge variant={statusVariant} className="rounded-full">{status}</Badge>;
+        return (
+          <Badge variant={statusVariant} className="rounded-full">
+            {status}
+          </Badge>
+        );
       },
     },
     {
@@ -105,7 +116,12 @@ export function TodoDataTable({ data }: TodoDataTabble) {
     },
     {
       accessorKey: "createdAt",
-      header: () => <div className="text-right">createdAt</div>,
+      header: () => (
+        <div className="text-right flex items-center justify-end gap-2">
+          <Clock size={18} />
+          createdAt
+        </div>
+      ),
       cell: ({ row }) => {
         return (
           <div className="text-right font-medium">
@@ -121,30 +137,36 @@ export function TodoDataTable({ data }: TodoDataTabble) {
         const todo = row.original;
 
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              asChild
-              className="flex items-center justify-center"
-            >
-              <Button variant="link" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <DotsHorizontalIcon className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(todo.id)}
+          <div className="flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                asChild
+                className="flex items-center justify-center"
               >
-                Copy todo ID
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleToggleDoneTodo(todo)}>Mark as done</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleDeleteTodo(todo.id)}>
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                <Button variant="link" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <DotsHorizontalIcon className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => navigator.clipboard.writeText(todo.id)}
+                >
+                  Copy todo ID
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => handleToggleDoneTodo(todo)}>
+                  Mark as done
+                </DropdownMenuItem>
+                <DropdownMenuItem></DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleDeleteTodo(todo.id)}>
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+          </div>
         );
       },
     },
@@ -189,7 +211,10 @@ export function TodoDataTable({ data }: TodoDataTabble) {
             }
             className="max-w-sm"
           />
-          <Button variant={"outline"} className="border border-zinc-200 hover:bg-black hover:text-white">
+          <Button
+            variant={"outline"}
+            className="border border-zinc-200 hover:bg-black hover:text-white"
+          >
             <Search />
           </Button>
         </div>
@@ -198,7 +223,10 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           <DialogAddTask>Add Task</DialogAddTask>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto rounded-[6px] border border-zinc-200 hover:bg-black hover:text-white">
+              <Button
+                variant="outline"
+                className="ml-auto rounded-[6px] border border-zinc-200 hover:bg-black hover:text-white"
+              >
                 Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -274,7 +302,6 @@ export function TodoDataTable({ data }: TodoDataTabble) {
           </TableBody>
         </Table>
       </div>
-      
     </div>
   );
 }

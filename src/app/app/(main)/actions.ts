@@ -1,6 +1,8 @@
 "use server";
-
-import { deleteTodoSchema, upsertTodoSchema } from "./schema";
+import {
+  deleteTodoSchema,
+  upsertTodoSchema,
+} from "./schema";
 import { auth } from "@/services/auth";
 import { prisma } from "@/services/database";
 

@@ -7,5 +7,5 @@ export const upsertTodoSchema = z.object({
 });
 
 export const deleteTodoSchema = z.object({
-  id: z.string()
+  id: z.string(),
 });
