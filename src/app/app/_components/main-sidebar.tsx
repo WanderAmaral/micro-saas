@@ -14,6 +14,7 @@ import { CalendarCheck2, Settings } from "lucide-react";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
 import UserDropDown from "./user-dropdown";
+import { ClipboardCheck } from 'lucide-react';
 
 type UserProps = {
   user: Session["user"];
@@ -39,6 +40,13 @@ const MainSidebar = ({ user }: UserProps) => {
                 <DashboardSidebarNavLink href="/app" active={isActive("/app")}>
                   <CalendarCheck2 size={20} />
                   Tarefas
+                </DashboardSidebarNavLink>
+                <DashboardSidebarNavLink
+                  href="/app/signature"
+                  active={isActive("/app/settings")}
+                >
+                  <ClipboardCheck size={20}/>
+                  Assinatura
                 </DashboardSidebarNavLink>
                 <DashboardSidebarNavLink
                   href="/app/settings"
