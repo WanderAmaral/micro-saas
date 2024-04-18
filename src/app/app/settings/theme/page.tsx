@@ -1,5 +1,11 @@
+import { ThemeForm } from "./_components/form";
+
 const ThemePage = () => {
-  return <>Hello world</>;
+  return (
+    <>
+      <ThemeForm />
+    </>
+  );
 };
 
 export default ThemePage;
