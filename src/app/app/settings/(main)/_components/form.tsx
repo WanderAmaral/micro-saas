@@ -102,15 +102,17 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
             />
           </CardContent>
         </Card>
-        <Button
-          className="bg-black text-white"
-          disabled={form.formState.isLoading}
-          type="submit"
-          variant={"outline"}
-        >
-          {form.formState.isSubmitting && "Salvando..."}
-          {!form.formState.isSubmitting && "Salvar alterações"}
-        </Button>
+        <div className=" flex justify-end items-end">
+          <Button
+            className="bg-black text-white"
+            disabled={form.formState.isLoading}
+            type="submit"
+            variant={"outline"}
+          >
+            {form.formState.isSubmitting && "Salvando..."}
+            {!form.formState.isSubmitting && "Salvar alterações"}
+          </Button>
+        </div>
       </form>
     </Form>
   );

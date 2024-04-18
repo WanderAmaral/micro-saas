@@ -61,7 +61,7 @@ const DialogAddTask = ({ children }: DialogAddTaskProps) => {
           {children}
         </div>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className=" text-black">
         <DialogHeader>Add Task</DialogHeader>
         <Form {...form}>
           <form className="space-y-8" onSubmit={handleOnSubmit}>
@@ -72,7 +72,7 @@ const DialogAddTask = ({ children }: DialogAddTaskProps) => {
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your todo title" {...field} />
+                    <Input placeholder="Enter your todo title" {...field} className="bg-white"/>
                   </FormControl>
                   <FormDescription>
                     This will be the publicly displayed name for the task.

@@ -106,7 +106,7 @@ export function DashboardSidebarNavLink({
       href={href}
       className={cn([
         "flex items-center text-xs px-3 py-2 gap-2 hover:text-black hover:bg-zinc-200 rounded-[6px]",
-        active && "bg-zinc-200",
+        active && "bg-zinc-200 text-black",
         className,
       ])}
     >

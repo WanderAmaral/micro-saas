@@ -16,7 +16,7 @@ const SettingsSidebar = () => {
 
   return (
     <>
-      <aside className="border-r boder-zinc-400  h-screen py-4 pr-3">
+      <aside className="border-r boder-zinc-400  h-[855px] py-4 pr-3">
         <DashboardSidebarNav>
           <DashboardSidebarNavMain>
             <DashboardSidebarNavLink
