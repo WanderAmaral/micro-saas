@@ -3,8 +3,12 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
+import { ThemeProvider } from "./_components/theme-provider";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ['100', '200', '300', '400', '500'] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500"],
+});
 
 export const metadata: Metadata = {
   title: "Micro-SaaS",
@@ -19,7 +23,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Toaster />
       </body>
     </html>
