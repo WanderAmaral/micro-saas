@@ -24,7 +24,7 @@ import {
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useTheme } from "next-themes";
-import { themeFormSchema } from "./schema";
+import { themeFormSchema } from "../schema";
 
 export function ThemeForm() {
   const theme = useTheme();

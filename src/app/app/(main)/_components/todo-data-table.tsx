@@ -211,12 +211,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
             }
             className="max-w-sm"
           />
-          <Button
-            variant={"outline"}
-            className="border border-zinc-200 hover:bg-black hover:text-white"
-          >
-            <Search />
-          </Button>
+          
         </div>
 
         <div className="flex  gap-3">

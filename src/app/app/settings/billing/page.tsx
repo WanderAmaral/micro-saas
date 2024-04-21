@@ -27,11 +27,11 @@ export default async function Page() {
         <CardContent className="pt-6">
           <div className="space-y-2">
             <header className="flex items-center justify-between">
-              <span className="text-muted-foreground text-sm">Your progress</span>
+              <span className="text-muted-foreground text-sm">Seu progresso</span>
               <span className="text-muted-foreground text-sm">20%</span>
             </header>
             <main>
-              <Progress value={20}/>
+              <Progress value={20} />
             </main>
           </div>
         </CardContent>
