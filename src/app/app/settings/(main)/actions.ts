@@ -2,7 +2,6 @@
 import { z } from "zod";
 import { updateProfileSchema } from "./schema";
 import { auth } from "@/services/auth";
-import { error } from "console";
 import { prisma } from "@/services/database";
 
 export const updateProfile = async (

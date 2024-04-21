@@ -137,7 +137,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
         const todo = row.original;
 
         return (
-          <div className="flex items-center">
+          <div className="flex items-center ">
             <DropdownMenu>
               <DropdownMenuTrigger
                 asChild
@@ -148,7 +148,7 @@ export function TodoDataTable({ data }: TodoDataTabble) {
                   <DotsHorizontalIcon className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="text-black">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                 <DropdownMenuItem
                   onClick={() => navigator.clipboard.writeText(todo.id)}
@@ -225,12 +225,12 @@ export function TodoDataTable({ data }: TodoDataTabble) {
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
-                className="ml-auto rounded-[6px] border border-zinc-200 hover:bg-black hover:text-white"
+                className="ml-auto rounded-[6px] border border-zinc-200 hover:bg-black hover:text-white "
               >
                 Columns <ChevronDownIcon className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="text-black rounded-[6px]">
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
