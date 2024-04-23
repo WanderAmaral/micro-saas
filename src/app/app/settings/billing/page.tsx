@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,12 +11,13 @@ import {
 import { Progress } from "@/components/ui/progress";
 
 import { auth } from "@/services/auth";
+import { createCheckoutSessionAction } from "./actions";
 
 export default async function Page() {
   const session = await auth();
 
   return (
-    <form>
+    <form action={createCheckoutSessionAction}>
       <Card>
         <CardHeader className="border-b border-border">
           <CardTitle>Uso do Plano</CardTitle>
@@ -27,7 +29,9 @@ export default async function Page() {
         <CardContent className="pt-6">
           <div className="space-y-2">
             <header className="flex items-center justify-between">
-              <span className="text-muted-foreground text-sm">Seu progresso</span>
+              <span className="text-muted-foreground text-sm">
+                Seu progresso
+              </span>
               <span className="text-muted-foreground text-sm">20%</span>
             </header>
             <main>
@@ -37,7 +41,9 @@ export default async function Page() {
         </CardContent>
         <CardFooter className="flex items-center justify-between border-t border-border pt-6">
           <span>Para um maior limite, assine o PRO</span>
-          <Button type="submit" variant={"outline"}>Assine por R$9/ mês</Button>
+          <Button type="submit" variant={"outline"}>
+            Assine por R$9/ mês
+          </Button>
         </CardFooter>
       </Card>
     </form>
