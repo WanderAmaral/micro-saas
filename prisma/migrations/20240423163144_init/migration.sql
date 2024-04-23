@@ -30,7 +30,11 @@ CREATE TABLE "User" (
     "name" TEXT,
     "email" TEXT,
     "emailVerified" DATETIME,
-    "image" TEXT
+    "image" TEXT,
+    "stripeCustomerId" TEXT,
+    "stripeSubscriptionId" TEXT,
+    "stripeSubscriptionStatus" TEXT,
+    "stripePriceId" TEXT
 );
 
 -- CreateTable
@@ -47,6 +51,7 @@ CREATE TABLE "Todo" (
     "userId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
+    "doneAt" DATETIME,
     CONSTRAINT "Todo_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 

@@ -9,12 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-
-import { auth } from "@/services/auth";
 import { createCheckoutSessionAction } from "./actions";
 
 export default async function Page() {
-  const session = await auth();
+
 
   return (
     <form action={createCheckoutSessionAction}>
