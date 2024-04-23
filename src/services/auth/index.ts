@@ -10,7 +10,7 @@ export const {
   pages: {
     signIn: "/app",
     signOut: "/auth",
-    error: "/auth",
+    error: "/",
     verifyRequest: "/auth",
     newUser: "/app",
   },
