@@ -22,4 +22,4 @@ export const {
       from: process.env.FROM_EMAIL,
     }),
   ],
-});
+}); 
