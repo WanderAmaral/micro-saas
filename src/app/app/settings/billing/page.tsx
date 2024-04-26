@@ -19,7 +19,7 @@ export default async function Page() {
 
   return (
     <form action={createCheckoutSessionAction}>
-      <Card>
+      <Card> 
         <CardHeader className="border-b border-border">
           <CardTitle>Uso do Plano</CardTitle>
           <CardDescription>
